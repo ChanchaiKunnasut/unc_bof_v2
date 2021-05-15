@@ -1,9 +1,11 @@
 import React from 'react'
 
-export const OrderList = () => {
+const OrderList = () => {
   return (
     <div>
       OrderList
     </div>
   )
 }
+
+export default OrderList
