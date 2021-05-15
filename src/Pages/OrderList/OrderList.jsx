@@ -1,11 +1,9 @@
 import React from 'react'
 
-const Login = () => {
+export const OrderList = () => {
   return (
     <div>
-      Login
+      OrderList
     </div>
   )
 }
-
-export default Login
