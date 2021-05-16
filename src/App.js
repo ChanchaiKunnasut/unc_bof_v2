@@ -8,12 +8,8 @@ const App = () => {
     <Router>
       <div>
         <Switch>
-          <Route exact path='/'>
-            <Login />
-          </Route>
-          <Route exact path='/order-list'>
-            <OrderList />
-          </Route>
+          <Route exact path='/' component={Login} />
+          <Route exact path='/order-list' component={OrderList} />
         </Switch>
       </div>
     </Router>
