@@ -1,11 +1,7 @@
 import React from 'react'
-
+import { LayoutComponent } from '../../Components'
 const OrderList = () => {
-  return (
-    <div>
-      OrderList
-    </div>
-  )
+  return <LayoutComponent ContentPage={<div>x</div>} />
 }
 
 export default OrderList
