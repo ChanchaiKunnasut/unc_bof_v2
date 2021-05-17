@@ -20,4 +20,4 @@ export const init = () => {
   return apiInstance
 }
 
-export { default as LoginService } from './LoginService/LoginService'
+export { default as LoginServices } from './LoginServices'

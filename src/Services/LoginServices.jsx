@@ -1,6 +1,6 @@
-import { init } from '../index'
+import { init } from './index'
 
-export const LoginService = async (username, password) => {
+export const LoginServices = async (username, password) => {
   const apiInstance = await init()
   const result = await apiInstance
     .request({
@@ -18,4 +18,4 @@ export const LoginService = async (username, password) => {
   return result
 }
 
-export default LoginService
+export default LoginServices
