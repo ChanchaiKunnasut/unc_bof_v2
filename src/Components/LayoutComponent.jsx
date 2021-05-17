@@ -6,33 +6,51 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons'
 const { Header, Content, Footer, Sider } = Layout
-const LayoutComponent = (props) => {
+const handleMenuClicked = (e, props) => {
+  console.log(props)
+  switch (+e.key) {
+    case 1:
+      props.history.push('/order-list')
+      break
+    case 2:
+      props.history.push('/')
+      break
+    default:
+      break
+  }
+}
+const LayoutComponent = ({ ContentPage, props }) => {
   return (
     <Layout>
       <Sider
         breakpoint='lg'
         collapsedWidth='0'
-        onBreakpoint={(broken) => {
-          console.log(broken)
-        }}
+        // onBreakpoint={(broken) => {
+        //   console.log(broken)
+        // }}
         onCollapse={(collapsed, type) => {
           console.log(collapsed, type)
         }}
       >
-        {/* <div className='h-8 m-4 bg-blue-200' /> */}
-        <Menu theme='dark' mode='inline' defaultSelectedKeys={['4']}>
+        <div className='h-8 m-4 bg-blue-200' />
+        <Menu
+          theme='dark'
+          mode='inline'
+          defaultSelectedKeys={['1']}
+          onClick={(e) => handleMenuClicked(e, props)}
+        >
           <Menu.Item key='1' icon={<UserOutlined />}>
-            nav 1
+            รายการสั่งซื้อ
           </Menu.Item>
           <Menu.Item key='2' icon={<VideoCameraOutlined />}>
-            nav 2
+            Login
           </Menu.Item>
-          <Menu.Item key='3' icon={<UploadOutlined />}>
+          {/* <Menu.Item key='3' icon={<UploadOutlined />}>
             nav 3
           </Menu.Item>
           <Menu.Item key='4' icon={<UserOutlined />}>
             nav 4
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu>
       </Sider>
       <Layout>
@@ -45,7 +63,7 @@ const LayoutComponent = (props) => {
             className='site-layout-background'
             style={{ padding: 24, minHeight: 360 }}
           >
-            {props.ContentPage}
+            {ContentPage}
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>

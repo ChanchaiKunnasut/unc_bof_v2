@@ -1,0 +1,65 @@
+{
+    "type":{
+        "th": "ประเภท"
+    },
+    "name":{
+        "th": "ชื่อ"
+    },
+    "phone":{
+        "th": "เบอร์โทร"
+    },
+    "email":{
+        "th": "Email"
+    },
+    "line":{
+        "th": "ID LINE"
+    },
+    "facebook":{
+        "th": "Facebook"
+    },
+    "nameClient":{
+        "th": "ชื่อ"
+    },
+    "phoneClient":{
+        "th": "เบอร์โทร"
+    },
+    "address":{
+        "th": "ที่อยู่ในการจัดส่ง"
+    },
+    "service":{
+        "th": "จัดส่งโดย"
+    },
+    "total": {
+        "th": "ทั้งหมด"
+    },
+    "WaitForPaid": {
+        "th": "รอการชำระเงิน"
+    },
+    "WaitForApproveAdminPrice": {
+        "th": "รอการตรวจสอบจากผู้ดูแล"
+    },
+    "WaitForApprove": {
+        "th": "รอตรวจสอบการโอนเงิน"
+    },
+    "WaitForPrepare": {
+        "th": "รอจัดสินค้า"
+    },
+    "Prepare": {
+        "th": "จัดสินค้าเสร็จแล้ว"
+    },
+    "Delivered": {
+        "th": "จัดส่งแล้ว"
+    },
+    "Cancel": {
+        "th": "ยกเลิก"
+    },
+    "wholesale": {
+        "th": "ตัวแทน"
+    },
+    "retail": {
+        "th": "ขายปลีก"
+    },
+    "undefined": {
+        "th": ""
+    }
+}

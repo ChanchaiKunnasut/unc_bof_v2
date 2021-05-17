@@ -21,3 +21,4 @@ export const init = () => {
 }
 
 export { default as LoginServices } from './LoginServices'
+export { GetOrders } from './OrderServices'
