@@ -2,25 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { LayoutComponent } from '../../Components'
 import {
   Button,
-  Col,
-  Row,
-  Alert,
-  Input,
+  // Col,
+  // Row,
+  // Alert,
+  // Input,
   Table,
-  Menu,
-  DatePicker,
-  Dropdown,
-  Badge,
-  Tabs,
-  Select,
-  Typography,
+  // Menu,
+  // DatePicker,
+  // Dropdown,
+  // Badge,
+  // Tabs,
+  // Select,
+  // Typography,
 } from 'antd'
 import { GetOrders } from '../../Services'
 import moment from 'moment'
 import translate from '../../i18n/translate.json'
 import { faUsersCog } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { FormOutlined, CaretDownOutlined, EyeFilled } from '@ant-design/icons'
+import { FormOutlined, EyeFilled } from '@ant-design/icons'
 
 const columns = [
   {
@@ -134,8 +134,8 @@ const columns = [
         </Button>
       )
     },
-    sorter: true,
-    sortDirections: ['descend', 'ascend'],
+    // sorter: true,
+    // sortDirections: ['descend', 'ascend'],
   },
   {
     key: 'setting',
@@ -210,22 +210,25 @@ const columns = [
 ]
 
 const OrderListTable = () => {
-  const [ordersList, setOrdersList] = useState([])
+  const [orderList, setOrderList] = useState([])
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
-    const getOrdersList = async () => {
+    const getOrderList = async () => {
       try {
+        setLoading(true)
         const result = await GetOrders()
-        await setOrdersList(result.data.data)
+        await setOrderList(result.data.data)
+        setLoading(false)
       } catch (e) {
         console.error(e)
       }
     }
-    getOrdersList()
+    getOrderList()
   }, [])
   return (
     <Table
       columns={columns}
-      dataSource={ordersList}
+      dataSource={orderList}
       rowKey='_id'
       pagination={{
         // defaultCurrent: state.pages.page,
@@ -244,6 +247,7 @@ const OrderListTable = () => {
         //   })
         // },
       }}
+      loading={loading}
     />
   )
 }

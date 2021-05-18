@@ -1,7 +1,6 @@
 import React from 'react'
 import { Layout, Menu } from 'antd'
 import {
-  UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons'
@@ -61,7 +60,7 @@ const LayoutComponent = ({ ContentPage, props }) => {
         <Content style={{ margin: '24px 16px 0' }}>
           <div
             className='site-layout-background'
-            style={{ padding: 24, minHeight: 360 }}
+            style={{ padding: 24, minHeight: "88vh" }}
           >
             {ContentPage}
           </div>
