@@ -1,24 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Layout, Menu } from 'antd'
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons'
+import { UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
+import { OrderList, ProductList } from '../Components'
+
 const { Header, Content, Footer, Sider } = Layout
-const handleMenuClicked = (e, props) => {
-  console.log(props)
-  switch (+e.key) {
-    case 1:
-      props.history.push('/order-list')
-      break
-    case 2:
-      props.history.push('/')
-      break
-    default:
-      break
+const MainLayout = () => {
+  const [content, setContent] = useState(OrderList)
+  const handleMenuClicked = async (e) => {
+    switch (+e.key) {
+      case 1:
+        setContent(OrderList)
+        break
+      case 2:
+        setContent(ProductList)
+        break
+      default:
+        break
+    }
   }
-}
-const LayoutComponent = ({ ContentPage, props }) => {
+
   return (
     <Layout>
       <Sider
@@ -35,21 +35,15 @@ const LayoutComponent = ({ ContentPage, props }) => {
         <Menu
           theme='dark'
           mode='inline'
-          defaultSelectedKeys={['1']}
-          onClick={(e) => handleMenuClicked(e, props)}
+          defaultSelectedKeys={[2]}
+          onClick={(e) => handleMenuClicked(e)}
         >
           <Menu.Item key='1' icon={<UserOutlined />}>
             รายการสั่งซื้อ
           </Menu.Item>
           <Menu.Item key='2' icon={<VideoCameraOutlined />}>
-            Login
+            รายการสินค้า
           </Menu.Item>
-          {/* <Menu.Item key='3' icon={<UploadOutlined />}>
-            nav 3
-          </Menu.Item>
-          <Menu.Item key='4' icon={<UserOutlined />}>
-            nav 4
-          </Menu.Item> */}
         </Menu>
       </Sider>
       <Layout>
@@ -60,9 +54,9 @@ const LayoutComponent = ({ ContentPage, props }) => {
         <Content style={{ margin: '24px 16px 0' }}>
           <div
             className='site-layout-background'
-            style={{ padding: 24, minHeight: "88vh" }}
+            style={{ padding: 24, minHeight: '88vh' }}
           >
-            {ContentPage}
+            {content}
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>
@@ -73,4 +67,4 @@ const LayoutComponent = ({ ContentPage, props }) => {
   )
 }
 
-export default LayoutComponent
+export default MainLayout

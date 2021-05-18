@@ -1,12 +1,12 @@
 import React from 'react'
 import { Row, Col, Card, Form, Input, Button, message } from 'antd'
-import { LoginServices } from '../../Services'
+import { LoginServices } from '../Services'
 
 const Login = (props) => {
   const onFinish = async (values) => {
     try {
       await LoginServices(values.username, values.password)
-      props.history.push('/order-list')
+      props.history.push('/')
     } catch (err) {
       message.error('ชื่อผู้ใช้งานหรือรหัสผ่านของท่านไม่ถูกต้อง')
     }

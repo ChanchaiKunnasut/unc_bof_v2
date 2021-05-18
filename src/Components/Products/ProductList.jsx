@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { LayoutComponent } from '../../Components'
 import {
   Button,
   // Col,
@@ -209,26 +208,26 @@ const columns = [
   },
 ]
 
-const OrderListTable = () => {
-  const [orderList, setOrderList] = useState([])
+const ProductListTable = () => {
+  const [productList, setProductList] = useState([])
   const [loading, setLoading] = useState(false)
   useEffect(() => {
-    const getOrderList = async () => {
+    const getProductList = async () => {
       try {
         setLoading(true)
         const result = await GetOrders()
-        await setOrderList(result.data.data)
+        await setProductList(result.data.data)
         setLoading(false)
       } catch (e) {
         console.error(e)
       }
     }
-    getOrderList()
+    getProductList()
   }, [])
   return (
     <Table
       columns={columns}
-      dataSource={orderList}
+      dataSource={productList}
       rowKey='_id'
       pagination={{
         // defaultCurrent: state.pages.page,
@@ -252,7 +251,7 @@ const OrderListTable = () => {
   )
 }
 
-const OrderList = (props) => {
-  return <LayoutComponent ContentPage={<OrderListTable />} props={props} />
+const ProductList = (props) => {
+  return <ProductListTable />
 }
-export default OrderList
+export default ProductList

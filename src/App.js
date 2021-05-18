@@ -1,5 +1,5 @@
 import React from 'react'
-import { Login, OrderList } from './Pages'
+import { Login, MainLayout } from './Pages'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import 'antd/dist/antd.css'
 
@@ -8,8 +8,8 @@ const App = () => {
     <Router>
       <div>
         <Switch>
-          <Route exact path='/' component={Login} />
-          <Route exact path='/order-list' component={OrderList} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/' component={MainLayout} />
         </Switch>
       </div>
     </Router>
