@@ -24,7 +24,7 @@ export const LoginServices = async (username, password) => {
           apiInstance.defaults.headers.common['Authorization'] =
             Cookie.get('access_token')
           apiInstance.get('/users/my/profile').then((response) => {
-            Cookie.set('accountData', JSON.stringify(response.data))
+            Cookie.set('accountData', response.data)
             return
           })
         }

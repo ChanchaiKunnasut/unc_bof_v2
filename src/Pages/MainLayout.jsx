@@ -3,23 +3,24 @@ import { Layout, Menu, Popconfirm } from 'antd'
 import { UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
 import { OrderList, ProductList } from '../Components'
 import { LogOutService } from '../Services'
+import Cookie from 'js-cookie'
 const { Header, Content, Footer, Sider } = Layout
 const MainLayout = (props) => {
   const [content, setContent] = useState(null)
   const handleMenuClicked = (e) => {
     switch (+e.key) {
       case 1:
-        setContent(<OrderList />)
+        setContent(<OrderList accountData={Cookie.getJSON('accountData')} />)
         break
       case 2:
-        setContent(<ProductList />)
+        setContent(<ProductList accountData={Cookie.getJSON('accountData')} />)
         break
       default:
         setContent(<div>ERROR: 404 Page not found</div>)
     }
   }
   useEffect(() => {
-    setContent(<OrderList />)
+    setContent(<OrderList accountData={Cookie.getJSON('accountData')} />)
   }, [])
 
   const handleLogoutClick = () => {
