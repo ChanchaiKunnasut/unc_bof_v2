@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Row, Col, Card, Form, Input, Button, message } from 'antd'
 import { LoginServices } from '../Services'
+import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 const Login = (props) => {
   const [loading, setLoading] = useState(false)
@@ -30,23 +31,29 @@ const Login = (props) => {
                 onFinish={onFinish}
               >
                 <Form.Item
-                  label='ชื่อผู้ใช้งาน'
+                  // label='ชื่อผู้ใช้งาน'
                   name='username'
                   rules={[{ required: true, message: 'กรุณาใส่ชื่อผู้ใช้งาน' }]}
                 >
-                  <Input />
+                  <Input
+                    prefix={<UserOutlined className='site-form-item-icon' />}
+                    placeholder='ชื่อผู้ใช้งาน'
+                  />
                 </Form.Item>
                 <Form.Item
-                  label='รหัสผ่าน'
                   name='password'
                   rules={[
                     {
                       required: true,
-                      message: 'กรุณาใส่รหัส',
+                      message: 'กรุณาใส่รหัสผ่าน',
                     },
                   ]}
                 >
-                  <Input.Password />
+                  <Input
+                    prefix={<LockOutlined className='site-form-item-icon' />}
+                    type='password'
+                    placeholder='Password'
+                  />
                 </Form.Item>
                 <Form.Item>
                   <Button type='primary' htmlType='submit' loading={loading}>
