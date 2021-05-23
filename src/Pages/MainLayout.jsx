@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Layout, Menu } from 'antd'
+import { Layout, Menu, Popconfirm } from 'antd'
 import { UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
 import { OrderList, ProductList } from '../Components'
+import { LogOutService } from '../Services'
 const { Header, Content, Footer, Sider } = Layout
 const MainLayout = (props) => {
   const [content, setContent] = useState(null)
@@ -20,6 +21,11 @@ const MainLayout = (props) => {
   useEffect(() => {
     setContent(<OrderList />)
   }, [])
+
+  const handleLogoutClick = () => {
+    LogOutService()
+    props.history.push('/login')
+  }
   return (
     <Layout>
       <Sider breakpoint='lg' collapsedWidth='0'>
@@ -45,7 +51,21 @@ const MainLayout = (props) => {
         <Header
           className='site-layout-sub-header-background'
           style={{ padding: 0 }}
-        />
+        >
+          <div className='w-100 right-0 text-white text-right px-10'>
+            <Popconfirm
+              // placement='leftTop'
+              title={'คุณต้องการออกจากระบบใช่หรือไม่'}
+              onConfirm={handleLogoutClick}
+              okText='ใช่'
+              cancelText='ยกเลิก'
+            >
+              <div className='w-auto inline-block h-auto cursor-pointer'>
+                ออกจากระบบ
+              </div>
+            </Popconfirm>
+          </div>
+        </Header>
         <Content style={{ margin: '24px 16px 0' }}>
           <div
             className='site-layout-background'

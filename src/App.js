@@ -2,6 +2,7 @@ import React from 'react'
 import { Login, MainLayout } from './Pages'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import 'antd/dist/antd.css'
+import { PrivateRoute } from './Components'
 
 const App = () => {
   return (
@@ -9,7 +10,7 @@ const App = () => {
       <div>
         <Switch>
           <Route exact path='/login' component={Login} />
-          <Route exact path='/' component={MainLayout} />
+          <PrivateRoute exact path='/' component={MainLayout} />
         </Switch>
       </div>
     </Router>

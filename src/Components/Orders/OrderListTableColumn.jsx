@@ -3,7 +3,7 @@ import translate from '../../i18n/translate.json'
 import { faUsersCog } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormOutlined, EyeFilled } from '@ant-design/icons'
-import { permissionCheck, pathVisible } from '../../Services/Permissions'
+import { permissionCheck, pathVisible } from '../../Services'
 import {
   Button,
   // Col,
@@ -189,16 +189,16 @@ export const columns = [
           }
       }
       // return permission.viewDetail ? (
-        <Button
-          type='primary'
-          ghost
-          icon={props.icon}
-          onClick={() => {
-            // handleButton(props.method, record)
-          }}
-        >
-          {props.label}
-        </Button>
+      ;<Button
+        type='primary'
+        ghost
+        icon={props.icon}
+        onClick={() => {
+          // handleButton(props.method, record)
+        }}
+      >
+        {props.label}
+      </Button>
       // ) : (
       //   ''
       // )

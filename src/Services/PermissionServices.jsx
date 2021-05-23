@@ -223,18 +223,18 @@ const permission = {
     },
   },
 }
-// export const permissionCheck = (page, role) => {
-//   return {
-//     ...permission[page][role],
-//   }
-// }
+export const permissionCheck = (page, role) => {
+  return {
+    ...permission[page][role],
+  }
+}
 
-// export const pathVisible = (path, role) => {
-//   const module = path.replace('/', '')
-//   try {
-//     const grant = permission[module][role]
-//     return Object.values(grant).reduce((r, v) => r || v)
-//   } catch (e) {
-//     return false
-//   }
-// }
+export const pathVisible = (path, role) => {
+  const module = path.replace('/', '')
+  try {
+    const grant = permission[module][role]
+    return Object.values(grant).reduce((r, v) => r || v)
+  } catch (e) {
+    return false
+  }
+}

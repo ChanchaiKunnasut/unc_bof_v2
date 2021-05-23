@@ -20,5 +20,6 @@ export const init = () => {
   return apiInstance
 }
 
-export { default as LoginServices } from './LoginServices'
+export { LoginServices, LogOutService } from './LoginServices'
 export { GetOrders } from './OrderServices'
+export { permissionCheck, pathVisible } from './PermissionServices'
