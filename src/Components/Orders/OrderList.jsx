@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import {
-  Table,
-} from 'antd'
+import { Table } from 'antd'
 import { GetOrders } from '../../Services'
 import { columns } from './OrderListTableColumn'
 
 const OrderList = () => {
   const [orderList, setOrderList] = useState([])
   const [loading, setLoading] = useState(false)
-  // useEffect(() => {
-  //   const getOrderList = async () => {
-  //     try {
-  //       setLoading(true)
-  //       const result = await GetOrders()
-  //       await setOrderList(result.data.data)
-  //       setLoading(false)
-  //     } catch (e) {
-  //       console.error(e)
-  //     }
-  //   }
-  //   getOrderList()
-  // }, [])
+  useEffect(() => {
+    const getOrderList = async () => {
+      try {
+        setLoading(true)
+        const result = await GetOrders()
+        await setOrderList(result.data.data)
+        setLoading(false)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    getOrderList()
+  }, [])
 
   return (
     <Table
