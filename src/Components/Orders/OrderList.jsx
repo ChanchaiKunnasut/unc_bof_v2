@@ -213,9 +213,7 @@ export const OrderList = ({ accountData }) => {
       }
     }
     getOrderList()
-  }, [])
-
-  
+  }, [accountData])
 
   return (
     <Table
@@ -243,5 +241,3 @@ export const OrderList = ({ accountData }) => {
     />
   )
 }
-
-

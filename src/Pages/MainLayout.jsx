@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Layout, Menu, Popconfirm } from 'antd'
+import { Button, Layout, Menu, Popconfirm, Breadcrumb } from 'antd'
 import { UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
 import { OrderDetail, OrderList, ProductList } from '../Components'
 import { LogOutService } from '../Services'
@@ -10,11 +10,13 @@ const MainLayout = (props) => {
   const [createButtonName, setCreateButtonName] = useState('')
   const [contentName, setContentName] = useState('')
   const [componentType, setComponentType] = useState('list')
+  const [homeContent, setHomeContent] = useState('')
   const handleMenuClicked = (e) => {
     switch (+e.key) {
       case 1:
         setContent(<OrderList accountData={Cookie.getJSON('accountData')} />)
         setCreateButtonName('+ สร้างคำสั่งซื้อ')
+        setHomeContent('รายการสั่งซื้อ')
         break
       case 2:
         setContent(<ProductList accountData={Cookie.getJSON('accountData')} />)
@@ -27,6 +29,7 @@ const MainLayout = (props) => {
     setContent(<OrderList accountData={Cookie.getJSON('accountData')} />)
     setCreateButtonName('+ สร้างคำสั่งซื้อ')
     setContentName('order')
+    setHomeContent('รายการสั่งซื้อ')
   }, [])
 
   const handleLogoutClick = () => {
@@ -39,6 +42,7 @@ const MainLayout = (props) => {
       case 'order':
         setContent(<OrderDetail />)
         setComponentType('detail')
+        setHomeContent('รายการสั่งซื้อ')
         break
       default:
         break
@@ -84,14 +88,22 @@ const MainLayout = (props) => {
             </Popconfirm>
           </div>
         </Header>
-        <Content style={{ margin: '24px 16px 0' }} className='relative'>
+        <Breadcrumb style={{ margin: '16px 16PX' }}>
+          <Breadcrumb.Item>{homeContent}</Breadcrumb.Item>
+          {componentType === 'detail' ? (
+            <Breadcrumb.Item>{createButtonName} </Breadcrumb.Item>
+          ) : (
+            ''
+          )}
           {componentType === 'list' ? (
-            <div className='relative mb-4 text-right'>
+            <div className='content-end text-right'>
               <Button type='primary' onClick={() => handleCreate()}>
                 {createButtonName}
               </Button>
             </div>
           ) : null}
+        </Breadcrumb>
+        <Content style={{ margin: '24px 16px 0' }} className='relative'>
           <div className='site-layout-background' style={{ minHeight: '88vh' }}>
             {content}
           </div>
