@@ -2,23 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { Layout, Menu } from 'antd'
 import { UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
 import { OrderList, ProductList } from '../Components'
-
+import { faChessKing } from '@fortawesome/free-solid-svg-icons'
+let content = <OrderList />
 const { Header, Content, Footer, Sider } = Layout
-const MainLayout = () => {
-  const [content, setContent] = useState(OrderList)
-  const handleMenuClicked = async (e) => {
+const MainLayout = (props) => {
+  const handleMenuClicked = (e) => {
     switch (+e.key) {
       case 1:
-        setContent(OrderList)
+        content = <OrderList />
         break
       case 2:
-        setContent(ProductList)
+        content = <ProductList />
         break
       default:
-        break
+        content = <OrderList />
     }
   }
-
   return (
     <Layout>
       <Sider
@@ -27,16 +26,16 @@ const MainLayout = () => {
         // onBreakpoint={(broken) => {
         //   console.log(broken)
         // }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type)
-        }}
+        // onCollapse={(collsed, type) => {
+        //   console.log(collapsed, type)
+        // }}
       >
         <div className='h-8 m-4 bg-blue-200' />
         <Menu
           theme='dark'
           mode='inline'
-          defaultSelectedKeys={[2]}
           onClick={(e) => handleMenuClicked(e)}
+          defaultSelectedKeys={['1']}
         >
           <Menu.Item key='1' icon={<UserOutlined />}>
             รายการสั่งซื้อ

@@ -23,30 +23,29 @@ const OrderList = () => {
   // }, [])
 
   return (
-    <div>x</div>
-    // <Table
-    //   columns={columns}
-    //   dataSource={orderList}
-    //   rowKey='_id'
-    //   pagination={{
-    //     // defaultCurrent: state.pages.page,
-    //     defaultPageSize: 30,
-    //     // total: state.pages.total,
-    //     // onChange: (page, pageSize) => {
-    //     //   setSearchConfig({
-    //     //     ...searchConfig,
-    //     //     page,
-    //     //   })
-    //     // },
-    //     // onShowSizeChange: (current, size) => {
-    //     //   setSearchConfig({
-    //     //     ...searchConfig,
-    //     //     limit: size,
-    //     //   })
-    //     // },
-    //   }}
-    //   loading={loading}
-    // />
+    <Table
+      columns={columns}
+      dataSource={orderList}
+      rowKey='_id'
+      pagination={{
+        // defaultCurrent: state.pages.page,
+        defaultPageSize: 30,
+        // total: state.pages.total,
+        // onChange: (page, pageSize) => {
+        //   setSearchConfig({
+        //     ...searchConfig,
+        //     page,
+        //   })
+        // },
+        // onShowSizeChange: (current, size) => {
+        //   setSearchConfig({
+        //     ...searchConfig,
+        //     limit: size,
+        //   })
+        // },
+      }}
+      loading={loading}
+    />
   )
 }
 export default OrderList
