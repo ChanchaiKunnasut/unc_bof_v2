@@ -1,19 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Row, Col, Card, Form, Input, Button, message } from 'antd'
 import { LoginServices } from '../Services'
 
 const Login = (props) => {
+  const [loading, setLoading] = useState(false)
   const onFinish = async (values) => {
     try {
+      setLoading(true)
       await LoginServices(values.username, values.password)
+      setLoading(false)
+      message.success('ลงชื่อเข้าใช้งานสำเร็จ')
       props.history.push('/')
     } catch (err) {
+      setLoading(false)
       message.error('ชื่อผู้ใช้งานหรือรหัสผ่านของท่านไม่ถูกต้อง')
     }
-  }
-
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo)
   }
 
   return (
@@ -27,7 +28,6 @@ const Login = (props) => {
                 name='basic'
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
               >
                 <Form.Item
                   label='ชื่อผู้ใช้งาน'
@@ -49,7 +49,7 @@ const Login = (props) => {
                   <Input.Password />
                 </Form.Item>
                 <Form.Item>
-                  <Button type='primary' htmlType='submit'>
+                  <Button type='primary' htmlType='submit' loading={loading}>
                     เข้าสู่ระบบ
                   </Button>
                 </Form.Item>

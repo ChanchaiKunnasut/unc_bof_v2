@@ -4,7 +4,7 @@ import Cookie from 'js-cookie'
 export const LoginServices = async (username, password) => {
   try {
     const apiInstance = await init()
-    const result = await apiInstance
+    await apiInstance
       .request({
         url: '/auth/admin/login',
         method: 'POST',
@@ -26,14 +26,10 @@ export const LoginServices = async (username, password) => {
           // history.push('/')
           // return
           // })
-        } else {
-          return response
         }
       })
-
-    return result
   } catch (e) {
-    console.error(e)
+    throw e
   }
 }
 
