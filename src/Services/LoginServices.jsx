@@ -36,10 +36,6 @@ export const LoginServices = async (username, password) => {
 
 export const LogOutService = () => {
   Object.keys(Cookie.get()).forEach(function (cookieName) {
-    var neededAttributes = {
-      // Here you pass the same attributes that were used when the cookie was created
-      // and are required when removing the cookie
-    }
-    Cookie.remove(cookieName, neededAttributes)
+    Cookie.remove(cookieName)
   })
 }
