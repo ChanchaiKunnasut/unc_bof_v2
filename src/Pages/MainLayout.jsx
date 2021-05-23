@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { Layout, Menu, Popconfirm } from 'antd'
+import { Button, Layout, Menu, Popconfirm } from 'antd'
 import { UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
-import { OrderList, ProductList } from '../Components'
+import { OrderDetail, OrderList, ProductList } from '../Components'
 import { LogOutService } from '../Services'
 import Cookie from 'js-cookie'
 const { Header, Content, Footer, Sider } = Layout
 const MainLayout = (props) => {
   const [content, setContent] = useState(null)
+  const [createButtonName, setCreateButtonName] = useState('')
+  const [contentName, setContentName] = useState('')
+  const [componentType, setComponentType] = useState('list')
   const handleMenuClicked = (e) => {
     switch (+e.key) {
       case 1:
         setContent(<OrderList accountData={Cookie.getJSON('accountData')} />)
+        setCreateButtonName('+ สร้างคำสั่งซื้อ')
         break
       case 2:
         setContent(<ProductList accountData={Cookie.getJSON('accountData')} />)
@@ -21,11 +25,24 @@ const MainLayout = (props) => {
   }
   useEffect(() => {
     setContent(<OrderList accountData={Cookie.getJSON('accountData')} />)
+    setCreateButtonName('+ สร้างคำสั่งซื้อ')
+    setContentName('order')
   }, [])
 
   const handleLogoutClick = () => {
     LogOutService()
     props.history.push('/login')
+  }
+
+  const handleCreate = () => {
+    switch (contentName) {
+      case 'order':
+        setContent(<OrderDetail />)
+        setComponentType('detail')
+        break
+      default:
+        break
+    }
   }
   return (
     <Layout>
@@ -40,12 +57,12 @@ const MainLayout = (props) => {
           <Menu.Item key='1' icon={<UserOutlined />}>
             รายการสั่งซื้อ
           </Menu.Item>
-          <Menu.Item key='2' icon={<VideoCameraOutlined />}>
+          {/* <Menu.Item key='2' icon={<VideoCameraOutlined />}>
             รายการสินค้า
           </Menu.Item>
           <Menu.Item key='3' icon={<VideoCameraOutlined />}>
             สินค้าเตรียมจัดส่ง
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu>
       </Sider>
       <Layout>
@@ -67,11 +84,15 @@ const MainLayout = (props) => {
             </Popconfirm>
           </div>
         </Header>
-        <Content style={{ margin: '24px 16px 0' }}>
-          <div
-            className='site-layout-background'
-            style={{ padding: 24, minHeight: '88vh' }}
-          >
+        <Content style={{ margin: '24px 16px 0' }} className='relative'>
+          {componentType === 'list' ? (
+            <div className='relative mb-4 text-right'>
+              <Button type='primary' onClick={() => handleCreate()}>
+                {createButtonName}
+              </Button>
+            </div>
+          ) : null}
+          <div className='site-layout-background' style={{ minHeight: '88vh' }}>
             {content}
           </div>
         </Content>
