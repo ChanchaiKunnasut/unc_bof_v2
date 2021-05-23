@@ -2,34 +2,27 @@ import React, { useEffect, useState } from 'react'
 import { Layout, Menu } from 'antd'
 import { UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
 import { OrderList, ProductList } from '../Components'
-import { faChessKing } from '@fortawesome/free-solid-svg-icons'
-let content = <OrderList />
 const { Header, Content, Footer, Sider } = Layout
 const MainLayout = (props) => {
+  const [content, setContent] = useState(null)
   const handleMenuClicked = (e) => {
     switch (+e.key) {
       case 1:
-        content = <OrderList />
+        setContent(<OrderList />)
         break
       case 2:
-        content = <ProductList />
+        setContent(<ProductList />)
         break
       default:
-        content = <OrderList />
+        setContent(<div>ERROR: 404 Page not found</div>)
     }
   }
+  useEffect(() => {
+    setContent(<OrderList />)
+  }, [])
   return (
     <Layout>
-      <Sider
-        breakpoint='lg'
-        collapsedWidth='0'
-        // onBreakpoint={(broken) => {
-        //   console.log(broken)
-        // }}
-        // onCollapse={(collsed, type) => {
-        //   console.log(collapsed, type)
-        // }}
-      >
+      <Sider breakpoint='lg' collapsedWidth='0'>
         <div className='h-8 m-4 bg-blue-200' />
         <Menu
           theme='dark'
@@ -42,6 +35,9 @@ const MainLayout = (props) => {
           </Menu.Item>
           <Menu.Item key='2' icon={<VideoCameraOutlined />}>
             รายการสินค้า
+          </Menu.Item>
+          <Menu.Item key='3' icon={<VideoCameraOutlined />}>
+            สินค้าเตรียมจัดส่ง
           </Menu.Item>
         </Menu>
       </Sider>

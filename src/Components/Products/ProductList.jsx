@@ -23,7 +23,7 @@ import { FormOutlined, EyeFilled } from '@ant-design/icons'
 
 const columns = [
   {
-    title: 'Order ID',
+    title: 'Product ID',
     dataIndex: 'orderId',
     key: 'orderId',
     sorter: true,
