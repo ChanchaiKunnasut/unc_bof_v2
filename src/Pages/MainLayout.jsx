@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Layout, Menu, Popconfirm, Breadcrumb } from 'antd'
 import { UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
-import { OrderDetail, OrderList, ProductList } from '../Components'
+import { OrderDetail, OrderList, ProductList, Ordering } from '../Components'
 import { LogOutService } from '../Services'
 import Cookie from 'js-cookie'
 const { Header, Content, Footer, Sider } = Layout
@@ -40,7 +40,7 @@ const MainLayout = (props) => {
   const handleCreate = () => {
     switch (contentName) {
       case 'order':
-        setContent(<OrderDetail />)
+        setContent(<Ordering />)
         setComponentType('detail')
         setHomeContent('รายการสั่งซื้อ')
         break
