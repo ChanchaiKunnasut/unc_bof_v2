@@ -50,7 +50,6 @@ const MainLayout = (props) => {
   }
 
   const renderContent = (param) => {
-    console.log('render new content')
     switch (param) {
       case '/orderlist':
         return <OrderList accountData={Cookies.getJSON('accountData')} />
