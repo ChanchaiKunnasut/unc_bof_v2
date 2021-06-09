@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Row, Col, Card, Form, Input, Button, message } from 'antd'
 import { LoginServices } from '../Services'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import Cookies from 'js-cookie'
+import { Route, Redirect } from 'react-router-dom'
 
 const Login = (props) => {
   const [loading, setLoading] = useState(false)
@@ -17,6 +19,10 @@ const Login = (props) => {
       message.error('ชื่อผู้ใช้งานหรือรหัสผ่านของท่านไม่ถูกต้อง')
     }
   }
+
+  useEffect(() => {
+    Cookies.get('loggedIn') && props.history.push('/') 
+  }, [props])
 
   return (
     <>
