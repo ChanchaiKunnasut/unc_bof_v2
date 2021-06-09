@@ -3,7 +3,6 @@ import { Row, Col, Card, Form, Input, Button, message } from 'antd'
 import { LoginServices } from '../Services'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import Cookies from 'js-cookie'
-import { Route, Redirect } from 'react-router-dom'
 
 const Login = (props) => {
   const [loading, setLoading] = useState(false)
@@ -13,7 +12,7 @@ const Login = (props) => {
       await LoginServices(values.username, values.password)
       setLoading(false)
       message.success('ลงชื่อเข้าใช้งานสำเร็จ')
-      props.history.push('/')
+      props.history.push('/orderlist')
     } catch (err) {
       setLoading(false)
       message.error('ชื่อผู้ใช้งานหรือรหัสผ่านของท่านไม่ถูกต้อง')
@@ -21,7 +20,7 @@ const Login = (props) => {
   }
 
   useEffect(() => {
-    Cookies.get('loggedIn') && props.history.push('/') 
+    Cookies.get('loggedIn') && props.history.push('/orderlist') 
   }, [props])
 
   return (

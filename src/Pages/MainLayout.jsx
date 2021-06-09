@@ -1,49 +1,61 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Layout, Menu, Popconfirm, Breadcrumb } from 'antd'
 import { UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
-import { OrderDetail, OrderList, ProductList, Ordering } from '../Components'
+import { OrderList, Ordering } from '../Components'
 import { LogOutService } from '../Services'
-import Cookie from 'js-cookie'
+import Cookies from 'js-cookie'
 const { Header, Content, Footer, Sider } = Layout
 const MainLayout = (props) => {
-  const [content, setContent] = useState(null)
   const [createButtonName, setCreateButtonName] = useState('')
-  const [contentName, setContentName] = useState('')
   const [componentType, setComponentType] = useState('list')
   const [homeContent, setHomeContent] = useState('')
+  const [pathName, setPathName] = useState('/')
   const handleMenuClicked = (e) => {
     switch (+e.key) {
       case 1:
-        setContent(<OrderList accountData={Cookie.getJSON('accountData')} />)
+        // setContent(<OrderList accountData={Cookie.getJSON('accountData')} />)
         setCreateButtonName('+ สร้างคำสั่งซื้อ')
         setHomeContent('รายการสั่งซื้อ')
         break
       case 2:
-        setContent(<ProductList accountData={Cookie.getJSON('accountData')} />)
+        // setContent(<ProductList accountData={Cookie.getJSON('accountData')} />)
         break
       default:
-        setContent(<div>ERROR: 404 Page not found</div>)
+      // setContent(<div>ERROR: 404 Page not found</div>)
     }
   }
   useEffect(() => {
-    setContent(<OrderList accountData={Cookie.getJSON('accountData')} />)
     setCreateButtonName('+ สร้างคำสั่งซื้อ')
-    setContentName('order')
     setHomeContent('รายการสั่งซื้อ')
-  }, [])
+    setPathName(props.history.location.pathname)
+    props.history.location.pathname === '/' && props.history.push('/orderlist')
+  }, [props, pathName])
 
   const handleLogoutClick = () => {
     LogOutService()
     props.history.push('/login')
   }
 
-  const handleCreate = () => {
-    switch (contentName) {
-      case 'order':
-        setContent(<Ordering />)
-        setComponentType('detail')
-        setHomeContent('รายการสั่งซื้อ')
+  const handleCreate = (param) => {
+    switch (param) {
+      case 'orderlist':
+        props.history.push('/orderlist')
         break
+      case 'ordering':
+        props.history.push('/ordering')
+        break
+      default:
+        break
+    }
+  }
+
+  const renderContent = (param) => {
+    console.log('render new content')
+    switch (param) {
+      case '/orderlist':
+        return <OrderList accountData={Cookies.getJSON('accountData')} />
+      case '/ordering':
+        return <Ordering />
       default:
         break
     }
@@ -97,7 +109,7 @@ const MainLayout = (props) => {
           )}
           {componentType === 'list' ? (
             <div className='content-end text-right'>
-              <Button type='primary' onClick={() => handleCreate()}>
+              <Button type='primary' onClick={() => handleCreate('ordering')}>
                 {createButtonName}
               </Button>
             </div>
@@ -105,7 +117,7 @@ const MainLayout = (props) => {
         </Breadcrumb>
         <Content style={{ margin: '24px 16px 0' }} className='relative'>
           <div className='site-layout-background' style={{ minHeight: '88vh' }}>
-            {content}
+            {renderContent(pathName)}
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>

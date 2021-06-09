@@ -10,7 +10,7 @@ const App = () => {
       <div>
         <Switch>
           <Route exact path='/login' component={Login} />
-          <PrivateRoute exact path='/' component={MainLayout} />
+          <PrivateRoute exact path={["/", "/ordering", "/orderlist"]} component={MainLayout} />
         </Switch>
       </div>
     </Router>
