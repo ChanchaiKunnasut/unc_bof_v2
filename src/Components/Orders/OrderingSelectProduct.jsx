@@ -1,14 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Tabs, Row, Col, List, Avatar, Button, InputNumber } from 'antd'
-
+import { CalculateOrder } from '../../Services'
 const { TabPane } = Tabs
 
 const callback = (key) => {
   console.log(key)
 }
-
+const initCalculatedOrder = {
+  total: 0,
+  totalDiscount: 0,
+  totalAfterSubDiscount: 0,
+  totalVat: 0,
+  totalWithOutVat: 0,
+}
 export const OrderingSelectProduct = ({ productList }) => {
   const [selectedProducts, setSelectedProducts] = useState([])
+  const [calculatedOrder, setCalculatedOrder] = useState(initCalculatedOrder)
   const increaseProduct = (item) => {
     let selected = selectedProducts
     const selectedProduct = selectedProducts.findIndex(
@@ -37,6 +44,11 @@ export const OrderingSelectProduct = ({ productList }) => {
     }
     setSelectedProducts([...selected])
   }
+
+  useEffect(() => {
+    setCalculatedOrder(CalculateOrder(selectedProducts))
+  }, [selectedProducts])
+
   return (
     <Row>
       <Col span={12} className='p-5'>
@@ -76,13 +88,21 @@ export const OrderingSelectProduct = ({ productList }) => {
       </Col>
       <Col span={12}>
         <div className='border-gray-300 border p-5 h-full'>
+          สรุปรายการสั่งซื้อ
           {selectedProducts.map((obj) => {
             return (
               <div key={obj._id}>
-                {obj.name} {obj.count}
+                {obj.name} {obj.count} <br />
               </div>
             )
           })}
+          ยอดรวม {calculatedOrder.total} <br />
+          ส่วนลด {calculatedOrder.totalDiscount} <br />
+          ยอดรวมหลังหักส่วนลด {calculatedOrder.totalAfterSubDiscount} <br />
+          ราคาสินค้าไม่รวมภาษี {calculatedOrder.totalWithOutVat} <br />
+          vat 7% {+calculatedOrder.totalVat} <br />
+          ยอดที่ต้องชำระ{' '}
+          {+calculatedOrder.totalWithOutVat + +calculatedOrder.totalVat}
         </div>
       </Col>
     </Row>
